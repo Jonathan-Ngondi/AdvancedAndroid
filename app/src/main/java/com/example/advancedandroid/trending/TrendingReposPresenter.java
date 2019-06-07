@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import com.example.advancedandroid.data.RepoRepository;
 import com.example.advancedandroid.di.ScreenScope;
 import com.example.advancedandroid.models.Repo;
+import com.example.advancedandroid.ui.ScreenNavigator;
 
 import javax.inject.Inject;
 
@@ -17,11 +18,15 @@ final class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
 
     private final TrendingReposViewModel viewModel;
     private final RepoRepository reposRepository;
-    
+    private final ScreenNavigator screenNavigator;
+
     @Inject
-    TrendingReposPresenter(TrendingReposViewModel viewModel, RepoRepository reposRepository){
+    TrendingReposPresenter(TrendingReposViewModel viewModel,
+                           RepoRepository reposRepository,
+                           ScreenNavigator screenNavigator){
         this.viewModel = viewModel;
         this.reposRepository = reposRepository;
+        this.screenNavigator = screenNavigator;
         loadRepos();
     }
 
@@ -38,6 +43,7 @@ final class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
 
     @Override
     public void onRepoClicked(Repo repo) {
+        screenNavigator.goToRepoDetails(repo.owner().login(), repo.name());
 
     }
 }

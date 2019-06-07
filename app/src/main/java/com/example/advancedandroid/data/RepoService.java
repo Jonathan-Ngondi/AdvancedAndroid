@@ -19,7 +19,7 @@ public interface RepoService {
     @GET("search/repositories?q=language:java&order=desc&sort=stars")
     Single<TrendingReposResponse> getTrendingRepos();
 
-    @GET("repos/{owner}/{name")
+    @GET("repos/{owner}/{name}")
     Single<Repo> getRepo(@Path("owner") String repoOwner, @Path("name") String repoName);
 
     @GET

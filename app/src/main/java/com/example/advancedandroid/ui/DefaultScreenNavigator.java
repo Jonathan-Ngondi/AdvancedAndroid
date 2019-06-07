@@ -3,6 +3,8 @@ package com.example.advancedandroid.ui;
 import com.bluelinelabs.conductor.Controller;
 import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
+import com.example.advancedandroid.details.RepoDetailsController;
 import com.example.advancedandroid.di.ActivityScope;
 
 import javax.inject.Inject;
@@ -23,6 +25,16 @@ public class DefaultScreenNavigator implements ScreenNavigator {
         this.router = router;
         if(!router.hasRootController()){
             router.setRoot(RouterTransaction.with(rootScreen));
+        }
+
+    }
+
+    @Override
+    public void goToRepoDetails(String repoOwner, String repoName) {
+        if(router != null){
+            router.pushController(RouterTransaction.with(RepoDetailsController.newInstance(repoName, repoOwner))
+                    .pushChangeHandler(new FadeChangeHandler())
+                    .popChangeHandler(new FadeChangeHandler()));
         }
 
     }

@@ -11,6 +11,8 @@ public interface ScreenNavigator {
 
     void initWithRouter(Router router, Controller rootScreen);
 
+    void goToRepoDetails(String repoOwner, String repoName);
+
     boolean pop();
 
     void clear();
