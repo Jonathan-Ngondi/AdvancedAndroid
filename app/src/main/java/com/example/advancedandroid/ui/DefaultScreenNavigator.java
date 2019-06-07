@@ -5,7 +5,6 @@ import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.example.advancedandroid.details.RepoDetailsController;
-import com.example.advancedandroid.di.ActivityScope;
 
 import javax.inject.Inject;
 
@@ -13,7 +12,7 @@ import javax.inject.Inject;
  * @author Mugiwara_Munyi
  * @date 28/05/2019
  */
-@ActivityScope
+
 public class DefaultScreenNavigator implements ScreenNavigator {
 
     private Router router;
