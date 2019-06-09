@@ -1,7 +1,9 @@
 package com.example.advancedandroid.ui;
 
+import android.support.v7.app.AppCompatActivity;
+
 import com.bluelinelabs.conductor.Controller;
-import com.bluelinelabs.conductor.Router;
+import com.example.advancedandroid.lifecycle.ActivityLifeCycleTask;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -12,19 +14,19 @@ import javax.inject.Singleton;
  */
 
 @Singleton
-public class TestScreenNavigator implements ScreenNavigator {
+public class TestScreenNavigator extends ActivityLifeCycleTask implements ScreenNavigator {
 
     private final DefaultScreenNavigator screenNavigator;
     private Controller overrideController;
 
     @Inject
-    TestScreenNavigator(DefaultScreenNavigator screenNavigator){
-        this.screenNavigator = screenNavigator;
+    TestScreenNavigator(){
+        this.screenNavigator = new DefaultScreenNavigator();
     }
 
     /**
      * Set the Controller to launch when the Activity attaches to the Screen Navigator. This will be
-     * used instead of the Controller passed in to {@link ScreenNavigator#initWithRouter(Router, Controller)}
+     * used instead of the Controller provided by {@link RouterProvider#initialScreen()} )}
      *
      * @param overrideController Controller to launch when the Activity starts. Or null to fall back to default.
      */
@@ -33,9 +35,14 @@ public class TestScreenNavigator implements ScreenNavigator {
     }
 
     @Override
-    public void initWithRouter(Router router, Controller rootScreen) {
-        Controller launchController = overrideController==null?rootScreen: overrideController;
-        screenNavigator.initWithRouter(router, launchController);
+    public void onCreate(AppCompatActivity activity) {
+        if(!(activity instanceof RouterProvider)){
+            throw new IllegalArgumentException("Activity must be an instance of Router Provider.");
+        }
+        Controller launchController = overrideController==null?
+                ((RouterProvider) activity).initialScreen(): overrideController;
+        screenNavigator.initWithRouter(((RouterProvider) activity).getRouter(),
+                launchController);
 
     }
 
@@ -50,7 +57,8 @@ public class TestScreenNavigator implements ScreenNavigator {
     }
 
     @Override
-    public void clear() {
-        screenNavigator.clear();
+    public void onDestroy(AppCompatActivity activity) {
+        screenNavigator.onDestroy(activity);
     }
+
 }

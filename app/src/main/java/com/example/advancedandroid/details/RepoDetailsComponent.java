@@ -1,5 +1,7 @@
 package com.example.advancedandroid.details;
 
+import com.example.advancedandroid.base.ScreenModule;
+import com.example.advancedandroid.di.ScreenComponent;
 import com.example.advancedandroid.di.ScreenScope;
 
 import javax.inject.Named;
@@ -13,8 +15,11 @@ import dagger.android.AndroidInjector;
  * @date 04/06/2019
  */
 @ScreenScope
-@Subcomponent
-public interface RepoDetailsComponent extends AndroidInjector<RepoDetailsController> {
+@Subcomponent (modules = {
+        ScreenModule.class,
+        RepoDetailsScreenModule.class,
+})
+public interface RepoDetailsComponent extends ScreenComponent<RepoDetailsController> {
     @Subcomponent.Builder
     abstract class Builder extends AndroidInjector.Builder<RepoDetailsController>{
 

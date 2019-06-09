@@ -2,6 +2,7 @@ package com.example.advancedandroid.trending;
 
 import com.example.advancedandroid.data.RepoRepository;
 import com.example.advancedandroid.data.TrendingReposResponse;
+import com.example.advancedandroid.lifecycle.DisposableManager;
 import com.example.advancedandroid.models.Repo;
 import com.example.advancedandroid.testutils.TestUtils;
 import com.example.advancedandroid.ui.ScreenNavigator;
@@ -115,6 +116,6 @@ public class TrendingReposPresenterTest {
         return error;
     }
     private void initializePresenter(){
-        presenter = new TrendingReposPresenter(trendingViewModel, repoRepository, screenNavigator);
+        presenter = new TrendingReposPresenter(trendingViewModel, repoRepository, screenNavigator, Mockito.mock(DisposableManager.class));
     }
 }

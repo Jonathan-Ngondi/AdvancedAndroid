@@ -14,9 +14,12 @@ import com.bluelinelabs.conductor.Router;
 import com.example.advancedandroid.R;
 import com.example.advancedandroid.di.Injector;
 import com.example.advancedandroid.di.ScreenInjector;
+import com.example.advancedandroid.lifecycle.ActivityLifeCycleTask;
 import com.example.advancedandroid.ui.ActivityViewInterceptor;
+import com.example.advancedandroid.ui.RouterProvider;
 import com.example.advancedandroid.ui.ScreenNavigator;
 
+import java.util.Set;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -25,11 +28,12 @@ import javax.inject.Inject;
  * @author Mugiwara_Munyi
  * @date 27/05/2019
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements RouterProvider {
 
     @Inject ScreenInjector screenInjector;
     @Inject ScreenNavigator screenNavigator;
     @Inject ActivityViewInterceptor activityViewInterceptor;
+    @Inject Set<ActivityLifeCycleTask> activityLifeCycleTasks;
 
     private static String INSTANCE_ID_KEY = "instance_id";
     private String instanceId;
@@ -51,9 +55,48 @@ public abstract class BaseActivity extends AppCompatActivity {
             throw new IllegalArgumentException("Activity must have a view with id: screen_container");
         }
         router = Conductor.attachRouter(this, screenContainer, savedInstanceState);
-        screenNavigator.initWithRouter(router, initialScreen());
         monitorBackStack();
+        for(ActivityLifeCycleTask task: activityLifeCycleTasks){
+            task.onCreate(this);
+        }
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        for(ActivityLifeCycleTask task: activityLifeCycleTasks){
+            task.onStart(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        for(ActivityLifeCycleTask task: activityLifeCycleTasks){
+            task.onResume(this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        for(ActivityLifeCycleTask task: activityLifeCycleTasks){
+            task.onPause(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        for(ActivityLifeCycleTask task: activityLifeCycleTasks){
+            task.onStop(this);
+        }
+    }
+
+    @Override
+    public Router getRouter() {
+        return router;
     }
 
     private void monitorBackStack(){
@@ -85,7 +128,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @LayoutRes
     protected abstract int layoutRes();
 
-    protected abstract Controller initialScreen();
+    public abstract Controller initialScreen();
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -109,12 +152,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        screenNavigator.clear();
         if(isFinishing()){
             Injector.clearComponent(this);
         }
 
         activityViewInterceptor.clear();
+        for(ActivityLifeCycleTask task: activityLifeCycleTasks){
+            task.onDestroy(this);
+        }
     }
 
     public ScreenInjector getScreenInjector() {

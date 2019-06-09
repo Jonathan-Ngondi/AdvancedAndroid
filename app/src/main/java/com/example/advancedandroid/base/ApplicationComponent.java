@@ -17,6 +17,7 @@ import dagger.Component;
         ActivityBindingModule.class,
         ServiceModule.class,
         RepoServiceModule.class,
+
 })
 public interface ApplicationComponent {
     void  inject(MyApplication myApplication);

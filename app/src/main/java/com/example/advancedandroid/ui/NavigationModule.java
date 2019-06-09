@@ -1,9 +1,10 @@
 package com.example.advancedandroid.ui;
 
-import com.example.advancedandroid.di.ActivityScope;
+import com.example.advancedandroid.lifecycle.ActivityLifeCycleTask;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.multibindings.IntoSet;
 
 /**
  * @author Mugiwara_Munyi
@@ -13,6 +14,9 @@ import dagger.Module;
 public abstract class NavigationModule {
 
     @Binds
-    @ActivityScope
     abstract ScreenNavigator providesScreeNavigator(DefaultScreenNavigator screenNavigator);
+
+    @Binds
+    @IntoSet
+    abstract ActivityLifeCycleTask bindsScreenNavigatorTask(DefaultScreenNavigator screenNavigator);
 }

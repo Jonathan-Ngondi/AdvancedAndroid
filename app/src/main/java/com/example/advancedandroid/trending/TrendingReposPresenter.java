@@ -3,7 +3,9 @@ package com.example.advancedandroid.trending;
 import android.annotation.SuppressLint;
 
 import com.example.advancedandroid.data.RepoRepository;
+import com.example.advancedandroid.di.ForScreen;
 import com.example.advancedandroid.di.ScreenScope;
+import com.example.advancedandroid.lifecycle.DisposableManager;
 import com.example.advancedandroid.models.Repo;
 import com.example.advancedandroid.ui.ScreenNavigator;
 
@@ -19,14 +21,18 @@ final class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
     private final TrendingReposViewModel viewModel;
     private final RepoRepository reposRepository;
     private final ScreenNavigator screenNavigator;
+    private final DisposableManager disposableManager;
 
     @Inject
     TrendingReposPresenter(TrendingReposViewModel viewModel,
                            RepoRepository reposRepository,
-                           ScreenNavigator screenNavigator){
+                           ScreenNavigator screenNavigator,
+                           @ForScreen DisposableManager disposableManager){
         this.viewModel = viewModel;
         this.reposRepository = reposRepository;
         this.screenNavigator = screenNavigator;
+        this.disposableManager = disposableManager;
+
         loadRepos();
     }
 
@@ -34,10 +40,11 @@ final class TrendingReposPresenter implements RepoAdapter.RepoClickedListener {
     @SuppressLint("CheckResult")
     private void loadRepos() {
         //noinspection ResultOfMethodCallIgnored
-        reposRepository.getTrendingRepos()
+
+        disposableManager.add(reposRepository.getTrendingRepos()
                 .doOnSubscribe( __ -> viewModel.loadingUpdated().accept(true))
                 .doOnEvent((d,t) -> viewModel.loadingUpdated().accept(false))
-                .subscribe(viewModel.reposUpdated(),viewModel.onError());
+                .subscribe(viewModel.reposUpdated(),viewModel.onError()));
 
     }
 
