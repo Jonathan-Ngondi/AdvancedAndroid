@@ -1,9 +1,12 @@
 package com.example.advancedandroid.base;
 
+import com.example.advancedandroid.data.RepoRepository;
+import com.example.advancedandroid.data.TestRepoService;
 import com.example.advancedandroid.data.TestRepoServiceModule;
 import com.example.advancedandroid.networking.ServiceModule;
 import com.example.advancedandroid.trending.TrendingReposControllerTest;
-import com.example.advancedandroid.ui.NavigationModule;
+import com.example.advancedandroid.ui.TestNavigationModule;
+import com.example.advancedandroid.ui.TestScreenNavigator;
 
 import javax.inject.Singleton;
 
@@ -19,8 +22,14 @@ import dagger.Component;
         TestActivityBindingModule.class,
         TestRepoServiceModule.class,
         ServiceModule.class,
-        NavigationModule.class,
+        TestNavigationModule.class,
 })
 public interface TestApplicationComponent extends ApplicationComponent{
    void inject(TrendingReposControllerTest trendingReposControllerTest);
+
+   TestScreenNavigator screenNavigator();
+
+   TestRepoService repoService();
+
+   RepoRepository repoRepository();
 }

@@ -21,7 +21,7 @@ public class TestUtils {
         this.moshi = moshi;
     }
 
-    private  <T> T loadJson(String path, Type type)
+    public  <T> T loadJson(String path, Type type)
     {
         try{
             String json = getFileString(path);
