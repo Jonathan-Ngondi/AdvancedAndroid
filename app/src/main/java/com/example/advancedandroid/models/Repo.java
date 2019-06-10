@@ -1,5 +1,6 @@
 package com.example.advancedandroid.models;
 
+import com.example.poweradapter.item.RecyclerItem;
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -13,7 +14,7 @@ import org.threeten.bp.ZonedDateTime;
  * @date 28/05/2019
  */
 @AutoValue
-public abstract class Repo {
+public abstract class Repo implements RecyclerItem {
 
     public abstract Long id();
 
@@ -37,6 +38,16 @@ public abstract class Repo {
 
     @Json(name = "updated_at")
     public abstract ZonedDateTime updatedDate();
+
+    @Override
+    public String renderKey() {
+        return "Repo";
+    }
+
+    @Override
+    public long getId() {
+        return id();
+    }
 
     public static JsonAdapter<Repo> jsonAdapter(Moshi moshi){
         return new AutoValue_Repo.MoshiJsonAdapter(moshi);

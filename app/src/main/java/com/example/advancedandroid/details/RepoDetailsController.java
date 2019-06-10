@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.bluelinelabs.conductor.Controller;
 import com.example.advancedandroid.R;
 import com.example.advancedandroid.base.BaseController;
+import com.example.poweradapter.adapter.RecyclerAdapter;
+import com.example.poweradapter.adapter.RecyclerDataSource;
 
 import java.util.Objects;
 
@@ -36,6 +38,7 @@ public class RepoDetailsController extends BaseController {
 
     @Inject RepoDetailsViewModel viewModel;
     @Inject RepoDetailsPresenter presenter;
+    @Inject RecyclerDataSource contibutorDataSource;
 
     @BindView(R.id.tv_repo_name) TextView repoNameText;
     @BindView(R.id.tv_repo_description) TextView repoDescriptionText;
@@ -55,7 +58,7 @@ public class RepoDetailsController extends BaseController {
     @Override
     protected void onViewBound(View view) {
         contributorList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        contributorList.setAdapter(new ContributorAdapter());
+        contributorList.setAdapter(new RecyclerAdapter(contibutorDataSource));
     }
 
     @Override
