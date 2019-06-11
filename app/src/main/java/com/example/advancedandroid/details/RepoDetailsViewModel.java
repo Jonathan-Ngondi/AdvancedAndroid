@@ -2,13 +2,10 @@ package com.example.advancedandroid.details;
 
 import com.example.advancedandroid.R;
 import com.example.advancedandroid.di.ScreenScope;
-import com.example.advancedandroid.models.Contributor;
 import com.example.advancedandroid.models.Repo;
 import com.jakewharton.rxrelay2.BehaviorRelay;
 
 import org.threeten.bp.format.DateTimeFormatter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -52,10 +49,10 @@ public class RepoDetailsViewModel {
                 .build());
     }
 
-    Consumer<List<Contributor>> processContributors(){
-        return contributors -> contributorStateRelay.accept(ContributorState.builder()
+    Consumer<Object> contributorsLoaded(){
+        return __ -> contributorStateRelay.accept(
+                ContributorState.builder()
                 .loading(false)
-                .contributors(contributors)
                 .build());
     }
 

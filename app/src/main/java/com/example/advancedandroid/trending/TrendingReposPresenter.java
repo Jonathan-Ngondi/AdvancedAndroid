@@ -1,7 +1,5 @@
 package com.example.advancedandroid.trending;
 
-import android.annotation.SuppressLint;
-
 import com.example.advancedandroid.data.RepoRepository;
 import com.example.advancedandroid.di.ForScreen;
 import com.example.advancedandroid.di.ScreenScope;
@@ -43,9 +41,7 @@ final class TrendingReposPresenter {
     }
 
 
-    @SuppressLint("CheckResult")
     private void loadRepos() {
-        //noinspection ResultOfMethodCallIgnored
 
         disposableManager.add(reposRepository.getTrendingRepos()
                 .doOnSubscribe( __ -> viewModel.loadingUpdated().accept(true))

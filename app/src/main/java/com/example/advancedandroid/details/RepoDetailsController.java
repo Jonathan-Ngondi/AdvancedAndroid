@@ -12,8 +12,6 @@ import com.example.advancedandroid.base.BaseController;
 import com.example.poweradapter.adapter.RecyclerAdapter;
 import com.example.poweradapter.adapter.RecyclerDataSource;
 
-import java.util.Objects;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -106,7 +104,7 @@ public class RepoDetailsController extends BaseController {
                                 contributorsErrorText.setVisibility(contributorsDetails.isSuccess()? View.GONE:View.VISIBLE);
                                 if(contributorsDetails.isSuccess()){
                                     contributorsErrorText.setText(null);
-                                    ((ContributorAdapter) Objects.requireNonNull(contributorList.getAdapter())).setData(contributorsDetails.contributors());
+
                                 } else {
                                     //noinspection ConstantConditions
                                     contributorsErrorText.setText(contributorsDetails.errorRes());

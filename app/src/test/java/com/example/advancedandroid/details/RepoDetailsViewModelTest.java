@@ -1,16 +1,13 @@
 package com.example.advancedandroid.details;
 
 import com.example.advancedandroid.R;
-import com.example.advancedandroid.models.Contributor;
 import com.example.advancedandroid.models.Repo;
 import com.example.advancedandroid.testutils.TestUtils;
-import com.squareup.moshi.Types;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Mugiwara_Munyi
@@ -20,7 +17,7 @@ public class RepoDetailsViewModelTest {
 
     private RepoDetailsViewModel viewModel;
     private Repo repo = TestUtils.loadJson("mock/repos/get_repo.json", Repo.class);
-    private List<Contributor> contributors = TestUtils.loadJson("mock/repos/contributors/get_contributors.json", Types.newParameterizedType(List.class, Contributor.class));
+
 
 
     @Before
@@ -30,11 +27,10 @@ public class RepoDetailsViewModelTest {
 
     @Test
     public void contributors() throws Exception{
-        viewModel.processContributors().accept(contributors);
+        viewModel.contributorsLoaded().accept(new Object());
 
         viewModel.contributors().test().assertValue(ContributorState.builder()
                 .loading(false)
-                .contributors(contributors)
                 .build());
     }
 

@@ -29,8 +29,7 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class BaseController extends Controller {
 
-    @Inject
-    Set<ScreenLifecycleTask> screenLifecycleTasks;
+    @Inject Set<ScreenLifecycleTask> screenLifecycleTasks;
     private final CompositeDisposable disposables = new CompositeDisposable();
     private boolean injected = false;
     Unbinder unbinder;
@@ -66,6 +65,7 @@ public abstract class BaseController extends Controller {
 
     @Override
     protected void onChangeStarted(@NonNull ControllerChangeHandler changeHandler, @NonNull ControllerChangeType changeType) {
+
         for(ScreenLifecycleTask task: screenLifecycleTasks){
             if(changeType.isEnter){
                 task.onEnterScope(getView());

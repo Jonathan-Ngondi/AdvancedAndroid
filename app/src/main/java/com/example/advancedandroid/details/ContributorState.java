@@ -1,9 +1,6 @@
 package com.example.advancedandroid.details;
 
-import com.example.advancedandroid.models.Contributor;
 import com.google.auto.value.AutoValue;
-
-import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -15,9 +12,6 @@ import javax.annotation.Nullable;
 abstract class ContributorState {
 
     abstract boolean loading();
-
-    @Nullable
-    abstract List<Contributor> contributors();
 
     @Nullable
     abstract Integer errorRes();
@@ -33,8 +27,6 @@ abstract class ContributorState {
     @AutoValue.Builder
     abstract static class Builder{
         abstract Builder loading(boolean loading);
-
-        abstract Builder contributors(List<Contributor> contributors);
 
         abstract Builder errorRes(Integer errorRes);
 
