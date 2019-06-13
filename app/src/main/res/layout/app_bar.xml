@@ -1,4 +1,5 @@
-<android.support.design.widget.AppBarLayout android:layout_height="?actionBarSize"
+<android.support.design.widget.AppBarLayout
+    android:layout_height="?actionBarSize"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?colorPrimary"

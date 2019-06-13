@@ -45,6 +45,7 @@ public class DebugActivityViewInterceptor implements ActivityViewInterceptor {
         initializePrefs();
 
         View activityLayout = LayoutInflater.from(activity).inflate(layoutRes, null);
+
         debugLayout.<ViewGroup>findViewById(R.id.activity_layout_container).addView(activityLayout);
         activity.setContentView(debugLayout);
     }

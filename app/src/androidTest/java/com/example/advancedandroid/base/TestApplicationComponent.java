@@ -3,6 +3,7 @@ package com.example.advancedandroid.base;
 import com.example.advancedandroid.data.RepoRepository;
 import com.example.advancedandroid.data.TestRepoService;
 import com.example.advancedandroid.data.TestRepoServiceModule;
+import com.example.advancedandroid.database.DatabaseModule;
 import com.example.advancedandroid.networking.ServiceModule;
 import com.example.advancedandroid.trending.TrendingReposControllerTest;
 import com.example.advancedandroid.ui.TestActivityViewInterceptorModule;
@@ -25,6 +26,7 @@ import dagger.Component;
         ServiceModule.class,
         TestNavigationModule.class,
         TestActivityViewInterceptorModule.class,
+        DatabaseModule.class,
 })
 public interface TestApplicationComponent extends ApplicationComponent{
    void inject(TrendingReposControllerTest trendingReposControllerTest);

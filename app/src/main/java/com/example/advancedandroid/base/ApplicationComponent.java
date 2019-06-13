@@ -1,6 +1,7 @@
 package com.example.advancedandroid.base;
 
 import com.example.advancedandroid.data.RepoServiceModule;
+import com.example.advancedandroid.database.DatabaseModule;
 import com.example.advancedandroid.networking.ServiceModule;
 
 import javax.inject.Singleton;
@@ -17,6 +18,7 @@ import dagger.Component;
         ActivityBindingModule.class,
         ServiceModule.class,
         RepoServiceModule.class,
+        DatabaseModule.class,
 
 })
 public interface ApplicationComponent {

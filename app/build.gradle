@@ -53,6 +53,7 @@ dependencies {
 
     implementation "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
 
+
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion"
@@ -70,6 +71,9 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$archComponentsVersion"
     implementation "android.arch.persistence.room:rxjava2:$archComponentsVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$archComponentsVersion"
+
+    implementation "com.facebook.stetho:stetho:$stetho"
+    debugImplementation "com.facebook.stetho:stetho:$stetho"
 
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation 'junit:junit:4.12'
