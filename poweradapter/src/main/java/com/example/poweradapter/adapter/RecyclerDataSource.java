@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * @author Mugiwara_Munyi
- * @date 10/06/2019
+ * @date 13/06/2019
  */
 public class RecyclerDataSource {
 
@@ -33,8 +33,6 @@ public class RecyclerDataSource {
         this.renderers = renderers;
         for(Map.Entry<String, ItemRenderer<? extends RecyclerItem>> entry: renderers.entrySet()){
             viewTypeToRendererKeyMap.put(entry.getValue().layoutRes(), entry.getKey());
-
-
         }
     }
 
@@ -44,7 +42,7 @@ public class RecyclerDataSource {
         data.clear();
         data.addAll(newData);
         RecyclerView.Adapter adapter = adapterReference.get();
-        if (adapter != null) {
+        if(adapter !=null){
             diffResult.dispatchUpdatesTo(adapter);
         }
     }
@@ -59,13 +57,9 @@ public class RecyclerDataSource {
         return renderers.get(data.get(position).renderKey()).layoutRes();
     }
 
-    int getCount(){
-        return data.size();
-    }
+    int getCount() {return data.size();}
 
-    RecyclerItem getItem(int position){
-        return data.get(position);
-    }
+    RecyclerItem getItem(int position) {return data.get(position);}
 
     void attachToAdapter(RecyclerView.Adapter adapter){
         adapterReference = new WeakReference<>(adapter);
@@ -80,4 +74,5 @@ public class RecyclerDataSource {
         this.data.addAll(data);
 
     }
+
 }

@@ -8,7 +8,7 @@ import com.example.poweradapter.item.RecyclerItem;
 
 /**
  * @author Mugiwara_Munyi
- * @date 10/06/2019
+ * @date 13/06/2019
  */
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
@@ -19,10 +19,5 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         this.renderer = renderer;
     }
 
-    void bind(RecyclerItem item){
-        renderer.render(itemView, item);
-    }
-
-
+    void bind(RecyclerItem item){ renderer.render(itemView, item);}
 }
-

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 /**
  * @author Mugiwara_Munyi
- * @date 10/06/2019
+ * @date 13/06/2019
  */
 public interface ItemRenderer<T extends RecyclerItem> {
 
@@ -16,5 +16,4 @@ public interface ItemRenderer<T extends RecyclerItem> {
     View createView(@NonNull ViewGroup parent);
 
     void render(@NonNull View itemView, @NonNull T item);
-
 }

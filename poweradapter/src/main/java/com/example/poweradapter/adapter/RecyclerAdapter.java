@@ -6,20 +6,19 @@ import android.view.ViewGroup;
 
 /**
  * @author Mugiwara_Munyi
- * @date 10/06/2019
+ * @date 13/06/2019
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private final RecyclerDataSource dataSource;
 
     public RecyclerAdapter(RecyclerDataSource dataSource){
         this.dataSource = dataSource;
         dataSource.attachToAdapter(this);
-        setHasStableIds(true);
     }
 
-
+    @NonNull
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new RecyclerViewHolder(parent, dataSource.rendererForType(viewType));
     }
 
@@ -34,12 +33,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
         return dataSource.viewResourceForPosition(position);
     }
 
     @Override
-    public long getItemId(int position){
+    public long getItemId(int position) {
         return dataSource.getItem(position).getId();
     }
 }

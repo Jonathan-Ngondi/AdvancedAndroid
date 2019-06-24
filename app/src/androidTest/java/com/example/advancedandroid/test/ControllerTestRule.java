@@ -29,7 +29,6 @@ public class ControllerTestRule<T extends Activity> extends ActivityTestRule<T> 
         repoRepository.clearCache();
         repoService.clearErrorFlags();
         repoService.clearHoldFlags();
-
     }
 
 }

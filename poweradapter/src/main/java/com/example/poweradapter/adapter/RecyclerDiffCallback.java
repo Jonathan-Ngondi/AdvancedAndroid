@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author Mugiwara_Munyi
- * @date 10/06/2019
+ * @date 13/06/2019
  */
 public class RecyclerDiffCallback extends DiffUtil.Callback {
 
@@ -20,6 +20,7 @@ public class RecyclerDiffCallback extends DiffUtil.Callback {
         this.oldList = oldList;
         this.newList = newList;
     }
+
     @Override
     public int getOldListSize() {
         return oldList.size();
